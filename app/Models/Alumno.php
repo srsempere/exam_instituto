@@ -10,6 +10,8 @@ class Alumno extends Model
 {
     use HasFactory;
 
+    protected $fillable = ['nombre'];
+
     public function notas(): HasMany
     {
         return $this->hasMany(Nota::class);

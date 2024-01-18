@@ -22,7 +22,7 @@ class AlumnoController extends Controller
      */
     public function create()
     {
-        //
+        return view('alumnos.create');
     }
 
     /**
@@ -30,7 +30,10 @@ class AlumnoController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validated = $this->validar($request);
+        $alumno = new Alumno($validated);
+        $alumno->save();
+        return redirect()->route('alumnos.index');
     }
 
     /**
@@ -38,7 +41,9 @@ class AlumnoController extends Controller
      */
     public function show(Alumno $alumno)
     {
-        //
+        return view('alumnos.show', [
+            'alumno' => $alumno,
+        ]);
     }
 
     /**
@@ -46,7 +51,9 @@ class AlumnoController extends Controller
      */
     public function edit(Alumno $alumno)
     {
-        //
+        return view('alumnos.edit', [
+            'alumno' => $alumno,
+        ]);
     }
 
     /**
@@ -54,7 +61,9 @@ class AlumnoController extends Controller
      */
     public function update(Request $request, Alumno $alumno)
     {
-        //
+        $validated = $this->validar($request);
+        $alumno->update($validated);
+        return redirect()->route('alumnos.index');
     }
 
     /**
@@ -62,6 +71,14 @@ class AlumnoController extends Controller
      */
     public function destroy(Alumno $alumno)
     {
-        //
+        $alumno->delete();
+        return redirect()->route('alumnos.index');
+    }
+
+    private function validar(REQUEST $request)
+    {
+        return $request->validate([
+            'nombre' => 'required|string|max:50'
+        ]);
     }
 }
