@@ -12,7 +12,7 @@ class AlumnoController extends Controller
      */
     public function index()
     {
-        return view('alumnos.index',[
+        return view('alumnos.index', [
             'alumnos' => Alumno::all(),
         ]);
     }
@@ -79,6 +79,13 @@ class AlumnoController extends Controller
     {
         return $request->validate([
             'nombre' => 'required|string|max:50'
+        ]);
+    }
+
+    public function criterios(Alumno $alumno)
+    {
+        return view('alumnos.criterios', [
+            'alumno' => $alumno,
         ]);
     }
 }
