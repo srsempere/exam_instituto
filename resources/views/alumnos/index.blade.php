@@ -1,3 +1,3 @@
 <x-app-layout>
-    hola
+    hola prueba
 </x-app-layout>
